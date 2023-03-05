@@ -2,6 +2,7 @@ import { todos } from '@/data/todos';
 import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 
+// I know this isn't RESTful at all. should've been split in something like todo/$todoId
 export async function GET(request: Request) {
   return NextResponse.json(todos);
 }
@@ -26,7 +27,6 @@ export async function DELETE(request: Request) {
   const { description } = body;
   console.log({ description });
   const index = todos.findIndex((t) => t.description === description);
-  console.log(index);
   todos.splice(index, 1);
   return new Response(JSON.stringify('ok'));
 }
